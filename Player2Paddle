@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player2Paddle : MonoBehaviour
+{
+
+    public float moveSpeed = 5.0f;
+    public float upperBound = 10.0f;
+    public float lowerBound = -10.0f;
+    public Vector3 startPosition = new Vector3(0.0f, 0.0f);
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        transform.localPosition = (Vector3)startPosition;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UserInput();
+    }
+
+    void UserInput()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (transform.localPosition.y > upperBound)
+            {
+                transform.localPosition = new Vector3(transform.localPosition.x, upperBound, transform.localPosition.z);
+            }
+            else
+            {
+                transform.localPosition += Vector3.up * moveSpeed * Time.deltaTime;
+            }
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            if (transform.localPosition.y < lowerBound)
+            {
+                transform.localPosition = new Vector3(transform.localPosition.x, lowerBound, transform.localPosition.z);
+            }
+            else
+            {
+                transform.localPosition += Vector3.down * moveSpeed * Time.deltaTime;
+            }
+        }
+    }
+}
